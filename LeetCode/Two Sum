@@ -1,56 +1,27 @@
-#My Solution:
-
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-       int[] result=new int[2];
+            
+    //     int[] result=new int[2];
+    //     for(int i=0;i<nums.length-1;i++){
+    //         for(int j=i+1;j<nums.length;j++){
+    //             if(nums[i]+nums[j]==target){
+    //                 result[0]=i;
+    //                 result[1]=j;
+    //             }
+    //         }
+    //     }
+    //     return result;
+    // }
+        HashMap<Integer, Integer> result=new HashMap<>();
         for(int i=0;i<nums.length;i++){
-            for(int j=i+1;j<nums.length;j++){
-                if(nums[i]+nums[j]==target){
-                    result[0]=i;
-                    result[1]=j;
-                }
+            if(result.containsKey(nums[i])){
+                int left=result.get(nums[i]);
+                return new int[]{left,i};
+            }
+            else{
+                result.put(target-nums[i],i);
             }
         }
-        return result;
+        return new int[]{};
     }
-}
-
-
-#Result
-#29 / 29 test cases passed.
-#Status: Accepted
-#Runtime: 93 ms
-#Memory Usage: 41 MB
-
-
-
-#Solution 2 Two Pass Hash Table
-
-public int[] twoSum(int[] nums, int target) {
-    Map<Integer, Integer> map = new HashMap<>();
-    for (int i = 0; i < nums.length; i++) {
-        map.put(nums[i], i);
-    }
-    for (int i = 0; i < nums.length; i++) {
-        int complement = target - nums[i];
-        if (map.containsKey(complement) && map.get(complement) != i) {
-            return new int[] { i, map.get(complement) };
-        }
-    }
-    throw new IllegalArgumentException("No two sum solution");
-}
-
-
-
-#One Pass Hash Table
-public int[] twoSum(int[] nums, int target) {
-    Map<Integer, Integer> map = new HashMap<>();
-    for (int i = 0; i < nums.length; i++) {
-        int complement = target - nums[i];
-        if (map.containsKey(complement)) {
-            return new int[] { map.get(complement), i };
-        }
-        map.put(nums[i], i);
-    }
-    throw new IllegalArgumentException("No two sum solution");
 }
