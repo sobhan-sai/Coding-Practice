@@ -1,0 +1,32 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        
+        int[] tempArray=new int[nums1.length+nums2.length];
+        double median;
+        int n=tempArray.length;
+        
+        for(int i=0;i<nums1.length;i++){
+            tempArray[i]=nums1[i];
+        }
+        for(int i=0;i<nums2.length;i++){
+            tempArray[nums1.length+i]=nums2[i];
+        }
+        Arrays.sort(tempArray);
+        
+        // for(int i=0;i<n;i++){
+        //     System.out.println(tempArray[i]);
+        // }
+        
+        if(n%2==0){
+           int test=(tempArray[((n/2)+1)-1]+tempArray[(n/2)-1]);
+            median=test/2.0;
+        }
+        else{
+            System.out.println("in else");
+            median=tempArray[((n+1)/2)-1];
+        }
+        
+    return median;
+    }
+    
+}
